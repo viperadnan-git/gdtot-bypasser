@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Oops</title>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/2.19.0/core.min.js"
+            integrity="sha512-t4NGjfaRaGCjmiTGBsiG3w8FCp8ZY7dPlwZAXfeoGPARUT/rt3OP0NpQkblSgZy/2R8vPTXiEcq/zcWIJ8NusQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+        <style>
+            @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+            .center-xy {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+            }
+            html,
+            body {
+                font-family: "Roboto Mono", monospace;
+                font-size: 16px;
+            }
+            html {
+                box-sizing: border-box;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            body {
+                background-color: #fff;
+            }
+            .container {
+                width: 100%;
+            }
+
+            .copy-container {
+                text-align: center;
+            }
+            p {
+                color: #000;
+                font-size: 24px;
+                font-weight: 900;
+                letter-spacing: 0.2px;
+                margin: 0;
+            }
+            .handle {
+                background: #00d515;
+                color: transparent;
+            }
+            .button-red {
+                background: #ff4742;
+                border: 1px solid #ff4742;
+                border-radius: 6px;
+                box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+                box-sizing: border-box;
+                color: #ffffff;
+                cursor: pointer;
+                display: inline-block;
+                font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+                font-size: 16px;
+                font-weight: 800;
+                line-height: 16px;
+                min-height: 40px;
+                outline: 0;
+                padding: 12px 14px;
+                text-align: center;
+                text-rendering: geometricprecision;
+                text-transform: none;
+                user-select: none;
+                -webkit-user-select: none;
+                touch-action: manipulation;
+                vertical-align: middle;
+            }
+
+            .button-red:hover,
+            .button-red:active {
+                background-color: initial;
+                background-position: 0 0;
+                color: #ff4742;
+            }
+
+            .button-red:active {
+                opacity: 0.5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="copy-container center-xy">
+                <p id="pad"></p>
+                <br>
+                <br>
+                <a class="button-red" onclick="window.location.reload()">Try Again</a>
+            </div>
+        </div>
+
+        <script>
+            var app = document.getElementById("pad");
+            var typewriter = new Typewriter(app, {
+                cursorClassName: "handle",
+                loop: true,
+            });
+
+            typewriter.typeString("{{ error|safe }}").pauseFor(4000).deleteAll().start();
+        </script>
+    </body>
+</html>

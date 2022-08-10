@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>GDToT Bypasser</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+            crossorigin="anonymous"
+        />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"
+            integrity="sha512-wT7uPE7tOP6w4o28u1DN775jYjHQApdBnib5Pho4RB0Pgd9y7eSkAV1BTqQydupYDB9GBhTcQQzyNMPMV3cAew=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <style>
+            .center-xy {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+            }
+            .container {
+                width: 100%;
+            }
+
+            .text-bg-red {
+                background: #ff4742;
+                color: white;
+                font-weight: 600;
+            }
+
+            .red-button {
+                background: #ff4742;
+                border: 1px solid #ff4742;
+                border-radius: 6px;
+                box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+                box-sizing: border-box;
+                color: #ffffff;
+                cursor: pointer;
+                display: inline-block;
+                font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+                font-size: 16px;
+                font-weight: 800;
+                line-height: 16px;
+                min-height: 40px;
+                outline: 0;
+                padding: 12px 14px;
+                text-align: center;
+                text-rendering: geometricprecision;
+                text-transform: none;
+                user-select: none;
+                -webkit-user-select: none;
+                touch-action: manipulation;
+                vertical-align: middle;
+            }
+
+            .red-button:hover,
+            .red-button:active {
+                background-color: initial;
+                background-position: 0 0;
+                color: #ff4742;
+            }
+
+            .red-button:active {
+                opacity: 0.5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container center-xy px-4">
+            <img hidden src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgdtot.viperadnan.ga&count_bg=%23FF4742&title_bg=%23555555&icon=googlechrome.svg&icon_color=%23FFFFFF&title=HITS&edge_flat=true"/>
+            <br><a class="lead text-decoration-none text-dark" style="font-size: 16px" href="https://github.com/viperadnan-git"
+                >&nbsp;viper<span class="text-danger">adnan</span>'s creation</a
+            >
+            <h1 style="font-size: 64px" class="display-1">GDToT Bypasser</h1>
+            <form action="/link" method="get">
+                <div class="mb-3">
+                    <input type="url" class="form-control" id="url" name="url" required />
+                    <script>
+                        function deleteCookies() {
+                            Swal.fire({
+                                title: "Are you sure?",
+                                text: "You won't be able to revert this!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#ff4742",
+                                confirmButtonText: "Yes, delete it!",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Cookies.remove("PHPSESSID");
+                                    Cookies.remove("crypt");
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Cookies cleared successfully.",
+                                        text: "Now the site will use the default account for downloads.",
+                                        confirmButtonColor: "#ff4742",
+                                    }).then((result) => {
+                                        window.location.reload();
+                                    });
+                                }
+                            });
+                        }
+                        function setCookies() {
+                            var disclaimer_text = `
+                            This server uses your GDToT account's cookies for bypassing the links. It doesn't read or can access your Google account's information or cookies. Your Google account is 100% safe. However we can access your GDToT account for bypassing links only. And if you do not trust the developer please don't use your cookies you can still bypass the GDToT link by using developer's GDToT account.
+                            `;
+                            var html_content = `
+                            Go to GDToT's official website and run this code
+
+                            <pre>javascript:window.location.href='${window.location.href}setcookie/'+document.cookie;</pre>
+
+                            Or copy the cookies manually and paste them below and submit.`;
+                            Swal.fire({
+                                icon: "warning",
+                                title: "Disclaimer",
+                                text: disclaimer_text,
+                                showCancelButton: true,
+                                confirmButtonColor: "#ff4742",
+                                confirmButtonText:"I Agree"
+                            }).then(() => {
+                                Swal.fire({
+                                    icon: "question",
+                                    title: "Use your own GDToT Account",
+                                    html: html_content,
+                                    confirmButtonText: "Save Cookies",
+                                    confirmButtonColor: "#ff4742",
+                                    reverseButtons: true,
+                                    inputAutoTrim: true,
+                                    showCancelButton: true,
+                                    allowOutsideClick: false,
+                                    input: "text",
+                                })
+                                    .then((result) => {
+                                        var output = {};
+                                        result.value.split(/\s*;\s*/).forEach(function (pair) {
+                                            pair = pair.split(/\s*=\s*/);
+                                            var name = decodeURIComponent(pair[0]);
+                                            var value = decodeURIComponent(pair.splice(1).join("="));
+                                            output[name] = value;
+                                        });
+                                        if (output.PHPSESSID && output.crypt) {
+                                            Cookies.set("PHPSESSID", output["PHPSESSID"], { expires: 3650 });
+                                            Cookies.set("crypt", output["crypt"], { expires: 3650 });
+                                            Swal.fire({
+                                                icon: "success",
+                                                title: "Cookies saved successfully!",
+                                                text: "Now all the files are copied in your Google Drive account.",
+                                                confirmButtonColor: "#ff4742",
+                                            }).then((result) => {
+                                                window.location.reload();
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                icon: "error",
+                                                title: "Invalid cookies provided!",
+                                                confirmButtonColor: "#ff4742",
+                                            });
+                                        }
+                                    })
+                                    .fail((error) => {
+                                        Swal.fire({
+                                            icon: "error",
+                                            title: "Something went wrong!",
+                                            confirmButtonColor: "#ff4742",
+                                        });
+                                    });
+                            });
+                        }
+                    </script>
+                    <div id="url" class="form-text">
+                        Enter GDToT URL, i.e https://new.gdtot.com/file/4467250075.
+                        <span class="badge text-bg-red" {% if custom_cookies %}onclick="deleteCookies()"
+                            >Delete Cookies{% else %}onclick="setCookies()">Have cookies?{% endif %}</span
+                        >
+                    </div>
+                </div>
+                <button type="submit" class="red-button">Do the Magic</button>
+            </form>
+        </div>
+    </body>
+</html>

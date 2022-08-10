@@ -1,0 +1,5 @@
+*.env
+*.tar
+__pycache__
+cookies.json
+test.py

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>404 - Page not found !</title>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/2.19.0/core.min.js"
+            integrity="sha512-t4NGjfaRaGCjmiTGBsiG3w8FCp8ZY7dPlwZAXfeoGPARUT/rt3OP0NpQkblSgZy/2R8vPTXiEcq/zcWIJ8NusQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <style>
+            @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+            .center-xy {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+            }
+            html,
+            body {
+                font-family: "Roboto Mono", monospace;
+                font-size: 16px;
+            }
+            html {
+                box-sizing: border-box;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            body {
+                background-color: #fff;
+            }
+            .container {
+                width: 100%;
+            }
+
+            .copy-container {
+                text-align: center;
+            }
+            p {
+                color: #000;
+                font-size: 24px;
+                font-weight: 900;
+                letter-spacing: 0.2px;
+                margin: 0;
+            }
+            .handle {
+                background: #00d515;
+                color: transparent;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="copy-container center-xy">
+                <p id="pad"></p>
+            </div>
+        </div>
+
+        <script>
+            var app = document.getElementById("pad");
+            var typewriter = new Typewriter(app, {
+                cursorClassName: "handle",
+            });
+
+            function redirectTo() {
+                window.location.href = "https://viperadnan-git.github.io";
+            }
+
+            typewriter
+                .typeString("404 Page not found !")
+                .pauseFor(2500)
+                .deleteAll()
+                .typeString("What are you waiting for ? Go somewhere else...")
+                .pauseFor(2500)
+                .deleteAll()
+                .typeString("What an idiot, huh okay let me take you to somewhere else...")
+                .pauseFor(1000)
+                .callFunction(redirectTo)
+                .start();
+        </script>
+    </body>
+</html>
