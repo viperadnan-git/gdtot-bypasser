@@ -1,20 +1,25 @@
-import json
-import os
-
-from dotenv import load_dotenv
+import json, os
+from decouple import config
 from flask import Flask
 
-load_dotenv()
+
+try:
+    gdown_base_url = config("GDOWN_URL", default="https://gdown.arnid.workers.dev/download?id=")
+    php_sess_id = config("PHPSESSID")
+    crypt = config("CRYPT")
+except Exception as err:
+    print(err)
+    print("PHPSESSID & CRYPT Not Found!")
+    exit()
 
 if os.path.exists("cookies.json"):
     with open("cookies.json") as f:
         default_cookies = json.load(f)
 else:
     default_cookies = [
-        {"PHPSESSID": os.environ["PHPSESSID"], "crypt": os.environ["CRYPT"]}
+        {"PHPSESSID": php_sess_id, "crypt": crypt}
     ]
 
-gdown_base_url = os.environ("GDOWN_URL", "https://gdown.arnid.workers.dev/download?id=")
 
 app = Flask(__name__, static_folder="static", static_url_path="/static")
 

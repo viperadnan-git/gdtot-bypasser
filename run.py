@@ -1,10 +1,9 @@
-from os import environ
+from decouple import config
 
 from gdtot import app
 
 app.run(
-    host=environ.get("HOST", "0.0.0.0"),
-    port=environ.get("PORT", 8000),
-    load_dotenv=True,
-    debug=(True if environ.get("DEBUG").lower() == "true" else False),
+    host=config("HOST", default="0.0.0.0"),
+    port=config("PORT", default=8000),
+    debug=config("DEBUG", default=False, cast=bool),
 )

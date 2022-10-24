@@ -1,5 +1,3 @@
-from fileinput import filename
-
 from flask import render_template, request
 
 from gdtot import app
@@ -11,7 +9,7 @@ def link_page():
     link = request.args.get("url")
     if link:
         try:
-            drive_link, direct_link, filename = get_links(
+            drive_link, direct_link, filename, size = get_links(
                 link=link, cookies=request.cookies
             )
         except ValueError as err:
@@ -20,6 +18,6 @@ def link_page():
             "link.html",
             drive_link=drive_link,
             direct_link=direct_link,
-            filename=filename,
+            filename=f"{filename} {size}",
         )
     return render_template("404.html"), 404

@@ -93,8 +93,8 @@ def get_links(link, cookies):
     else:
         cookies = {"PHPSESSID": cookies.get("PHPSESSID"), "crypt": cookies.get("crypt")}
     try:
-        drive_link, filename = GDTOT(link, cookies=cookies)
+        drive_link, filename, size = GDTOT(link, cookies=cookies)
     except Exception as err:
         raise ValueError(str(err))
     direct_link = gdown_base_url + getIdFromUrl(drive_link)
-    return drive_link, direct_link, filename
+    return drive_link, direct_link, filename, size
