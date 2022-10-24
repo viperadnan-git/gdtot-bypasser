@@ -70,7 +70,10 @@ def GDTOT(url: str, cookies: dict) -> str:
         filename = s3.find(
             "h6", class_="m-0 font-weight-bold text-light"
         ).string.replace("Download ", "")
-        return gdlink, filename
+        size = s3.find(
+            "a", class_="btn btn-outline-light btn-user font-weight-bold"
+        ).text.replace("Download Here ", "")
+        return gdlink.strip(), filename.strip(), size.strip()
 
 
 def getIdFromUrl(link: str):
