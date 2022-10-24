@@ -1,4 +1,4 @@
 flask
-python-dotenv
+python-decouple
 bs4
 requests

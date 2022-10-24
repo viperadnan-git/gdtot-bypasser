@@ -70,7 +70,10 @@ def GDTOT(url: str, cookies: dict) -> str:
         filename = s3.find(
             "h6", class_="m-0 font-weight-bold text-light"
         ).string.replace("Download ", "")
-        return gdlink, filename
+        size = s3.find(
+            "a", class_="btn btn-outline-light btn-user font-weight-bold"
+        ).text.replace("Download Here ", "")
+        return gdlink.strip(), filename.strip(), size.strip()
 
 
 def getIdFromUrl(link: str):
@@ -90,8 +93,8 @@ def get_links(link, cookies):
     else:
         cookies = {"PHPSESSID": cookies.get("PHPSESSID"), "crypt": cookies.get("crypt")}
     try:
-        drive_link, filename = GDTOT(link, cookies=cookies)
+        drive_link, filename, size = GDTOT(link, cookies=cookies)
     except Exception as err:
         raise ValueError(str(err))
     direct_link = gdown_base_url + getIdFromUrl(drive_link)
-    return drive_link, direct_link, filename
+    return drive_link, direct_link, filename, size
