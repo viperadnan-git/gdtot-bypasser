@@ -14,7 +14,7 @@ else:
         {"PHPSESSID": os.environ["PHPSESSID"], "crypt": os.environ["CRYPT"]}
     ]
 
-gdown_base_url = os.environ("GDOWN_URL", "https://gdown.arnid.workers.dev/download?id=")
+gdown_base_url = os.environ.get("GDOWN_URL", "https://gdown.arnid.workers.dev/download?id=")
 
 app = Flask(__name__, static_folder="static", static_url_path="/static")
 
